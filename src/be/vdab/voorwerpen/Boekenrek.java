@@ -1,4 +1,6 @@
-package jpfvoorwerpen;
+package be.vdab.voorwerpen;
+
+import be.vdab.util.Voorwerp;
 
 public class Boekenrek implements Voorwerp {
 

@@ -1,4 +1,9 @@
-package jpfvoorwerpen;
+package be.vdab;
+
+import be.vdab.voorwerpen.Boekenrek;
+import be.vdab.voorwerpen.Leesboek;
+import be.vdab.util.Voorwerp;
+import be.vdab.voorwerpen.Woordenboek;
 
 public class Main {
     public static void main(String[] args) {

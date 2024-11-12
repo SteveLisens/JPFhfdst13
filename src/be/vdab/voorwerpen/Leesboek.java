@@ -1,4 +1,4 @@
-package jpfvoorwerpen;
+package be.vdab.voorwerpen;
 
 public class Leesboek extends Boek {
     private String onderwerp;
