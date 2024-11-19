@@ -1,14 +1,17 @@
 package be.vdab.voorwerpen;
 
 import be.vdab.util.Voorwerp;
+import be.vdab.util.isbn13Exception;
 
 public abstract class Boek implements Voorwerp {
     private String titel;
     private String auteur;
     private float aankoopPrijs;
     private String genre;
+    private String isbn13;
 
-    public Boek(String titel, String auteur, float aankoopPrijs, String genre) {
+    public Boek(String isbn13, String titel, String auteur, float aankoopPrijs, String genre) {
+        setIsbn13(isbn13);
         setTitel(titel);
         setAuteur(auteur);
         setAankoopPrijs(aankoopPrijs);
@@ -51,9 +54,22 @@ public abstract class Boek implements Voorwerp {
             this.genre = genre;
     }
 
+    public String getIsbn13() {
+        return isbn13;
+    }
+
+    public final void setIsbn13(String isbn13) {
+        if (checkIsbn13(isbn13)) {
+            this.isbn13 = isbn13;
+        } else {
+            throw new isbn13Exception("laatste cijfer is ongeldig");
+        }
+    }
+
     @Override
     public void gegevensTonen() {
         System.out.println("GEGEVENS VAN EEN BOEK ");
+        System.out.println("Isbn13 : " + isbn13);
         System.out.println("Titel : " + titel);
         System.out.println("Auteur : " + auteur);
         System.out.println("Het is eigendom van : " + EIGENAAR);
@@ -63,7 +79,35 @@ public abstract class Boek implements Voorwerp {
 
     @Override
     public String toString() {
-        return (titel + " ; " + auteur + " ; " + EIGENAAR + " ; " +
+        return (isbn13 + " ; " + titel + " ; " + auteur + " ; " + EIGENAAR + " ; " +
                 aankoopPrijs + " ; " + genre);
+    }
+
+    private boolean checkIsbn13(String isbn13) {
+        if (isbn13 == null || isbn13.isBlank()) {
+            return false;
+        }
+        isbn13 = isbn13.replaceAll("-", "");
+
+        if (isbn13.length() != 13) {
+            return false;
+        }
+        try {
+            var tot = 0;
+            double factor;
+            for (var i = 0; i < 12; i++) {
+                var digit = Integer.parseInt(isbn13.substring(i, i + 1));
+                factor = (i % 2 == 0) ? 1 : 3;
+                tot += digit * factor;
+            }
+            var checksom = 10 - (tot % 10);
+            if (checksom == 10) {
+                checksom = 0;
+            }
+            return checksom == Integer.parseInt(isbn13.substring(12));
+        } catch (NumberFormatException ex) {
+            return false;
+
+        }
     }
 }

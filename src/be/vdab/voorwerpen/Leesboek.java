@@ -5,13 +5,13 @@ public class Leesboek extends Boek {
     private static final float WINSTMARGE = 1.5F;
 
     public Leesboek() {
-        this("Leesboek Java ", "O Reilly", 10.5F, "genre studie",
+        this("978-05-960-0920-5", "Leesboek Java ", "O Reilly", 10.5F, "genre studie",
                 "onderw Informatica");
     }
 
-    public Leesboek(String titel, String auteur, float aankoopPrijs,
+    public Leesboek(String isbn13, String titel, String auteur, float aankoopPrijs,
                     String genre, String onderwerp) {
-        super(titel, auteur, aankoopPrijs, genre);
+        super(isbn13, titel, auteur, aankoopPrijs, genre);
         setOnderwerp(onderwerp);
     }
 

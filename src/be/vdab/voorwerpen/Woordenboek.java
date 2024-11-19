@@ -5,13 +5,13 @@ public class Woordenboek extends Boek {
     private static final float WINSTMARGE = 1.75F;
 
     public Woordenboek() {
-        this("Woordenboek Nederlands", "Van Dale", 25.8F,
+        this("978-90-664-8384-2", "Woordenboek Nederlands", "Van Dale", 25.8F,
                 "verklarend woordenboek", "taal Nederlands");
     }
 
-    public Woordenboek(String titel, String auteur, float aankoopPrijs,
+    public Woordenboek(String isbn13, String titel, String auteur, float aankoopPrijs,
                        String genre, String taal) {
-        super(titel, auteur, aankoopPrijs, genre);
+        super(isbn13, titel, auteur, aankoopPrijs, genre);
         setTaal(taal);
     }
 
